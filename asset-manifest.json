@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/VanDeFlame/todo-app/static/css/main.66cda924.css",
+    "main.js": "/VanDeFlame/todo-app/static/js/main.ccc3a4c9.js",
+    "index.html": "/VanDeFlame/todo-app/index.html",
+    "main.66cda924.css.map": "/VanDeFlame/todo-app/static/css/main.66cda924.css.map",
+    "main.ccc3a4c9.js.map": "/VanDeFlame/todo-app/static/js/main.ccc3a4c9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.66cda924.css",
+    "static/js/main.ccc3a4c9.js"
+  ]
+}
