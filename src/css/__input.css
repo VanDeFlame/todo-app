@@ -1,0 +1,44 @@
+.button {
+  border-radius: 8px;
+  border: 4px var(--color-blue) solid;
+  border-top-color: var(--color-light-blue);
+  border-left-color: var(--color-light-blue);
+  border-bottom-color: var(--color-darker-blue);
+  border-right-color: var(--color-darker-blue);
+  background-color: var(--color-blue);
+  box-shadow: 4px 4px 12px #0005;
+  cursor: pointer;
+}
+
+.input-text {
+  border-radius: 8px;
+  border: 4px var(--color-blue) solid;
+  color: white;
+}
+
+.input-text::placeholder {
+  color: #ccc;
+}
+
+.input-text:focus, .input-text:focus-visible, .text-area:focus, .text-area:focus-visible {
+  outline: none;
+}
+
+.button:hover, .input-text {
+  border-top-color: var(--color-darker-blue);
+  border-left-color: var(--color-darker-blue);
+  border-bottom-color: var(--color-light-blue);
+  border-right-color: var(--color-light-blue);
+  background-color: var(--color-dark-blue);
+}
+
+.text-area {
+  border-radius: 8px;
+  border: 6px var(--color-dark-gray) solid;
+  border-top-color: var(--color-darker-gray);
+  border-left-color: var(--color-darker-gray);
+  border-bottom-color: var(--color-light-gray);
+  border-right-color: var(--color-light-gray);
+  background-color: var(--color-dark-gray); 
+  color: white;
+}

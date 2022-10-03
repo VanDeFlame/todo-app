@@ -1,0 +1,68 @@
+.TodoItem {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: relative;
+  min-height: 64px;
+  width: 300px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+    
+  border-radius: 8px;
+  border: 4px var(--color-gray) solid;
+  border-top-color: var(--color-light-gray);
+  border-left-color: var(--color-light-gray);
+  border-bottom-color: var(--color-darker-gray);
+  border-right-color: var(--color-darker-gray);
+  background-color: var(--color-gray);
+  box-shadow: 4px 4px 12px #0005
+}
+
+.TodoItem:last-child {
+  margin-bottom: 0;
+}
+
+.TodoItem--text {
+  padding-left: 12px;
+  padding-right: 8px;
+  text-align: start;
+  line-height: 28px;
+  color: white;
+}
+
+.TodoItem__completed > .TodoItem--text {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+.TodoItem--status {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 23px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bi-patch-check {
+  color: var(--color-good)
+}
+
+.bi-patch-minus {
+  color: var(--color-bad)
+}
+
+.TodoItem--delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.TodoItem--delete:hover {
+  color: var(--color-meh)
+}
+
+.TodoItem--delete > .bi {
+  display: flex;
+}

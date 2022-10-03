@@ -1,0 +1,16 @@
+.TodoCounter {
+  min-height: 35px;
+  margin: 20px 8px 12px;
+  color: #ddd;
+  font-weight: 500;
+}
+
+.TodoCounter--counter {
+  padding: 0 6px;
+  color: var(--color-lighter-blue);
+  font-weight: bold;
+}
+
+.TodoCounter--counter.counter__completed {
+  color: darkorange;
+}
