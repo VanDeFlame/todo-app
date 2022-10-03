@@ -6,7 +6,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Modal:FC<Props> = (props): ReactPortal  =>{
+const Modal:FC<Props> = (props): ReactPortal => {
   const modal = document.getElementById('modal');
   
   return createPortal(

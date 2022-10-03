@@ -2,3 +2,7 @@
   margin: 40px 0;
   color: white;
 }
+
+.Error > h2 {
+  margin-bottom: 8px;
+}

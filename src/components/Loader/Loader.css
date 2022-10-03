@@ -8,6 +8,10 @@
   color: white;
 }
 
+.Loader > h2 {
+  margin-bottom: 8px;
+}
+
 .Loader--box {
   display: flex;
   align-items: center;

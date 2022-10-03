@@ -24,22 +24,26 @@ const AppUI:FC = () => {
 
   const handleTodoListStatus = () => {
     // Loading
-    if (loading)                return <Loader />;
+    if (loading) return <Loader />;
     // Error
-    if (error)                  return <Error error={error} />;
+    if (error)   return <Error error={error} />;
+    
+    // Normal
+    if (searchedTodos.length) {
+      return searchedTodos.map((todo: Todo) => (
+        <TodoItem
+          todo={todo}
+          key={todo.text}
+        />
+      ))
+    }
+    
     // No results
     if (searchValue.length)     return <TodoListNoResults />;
     if (filterValue !== 'none') return <TodoListNoResults />;
-    // No exists TODOs
-    if (!searchedTodos.length)  return <TodoListEmpty />;
 
-    // Normal
-    return searchedTodos.map((todo: Todo) => (
-      <TodoItem
-        todo={todo}
-        key={todo.text}
-      />
-    ))
+    // No exists TODOs
+    return <TodoListEmpty />;
   }
 
   return (
