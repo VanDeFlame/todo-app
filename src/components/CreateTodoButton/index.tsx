@@ -1,9 +1,11 @@
-import React, { FC, useContext } from 'react'; 
-import { TodoContext } from '../TodoContext';
+import React, { FC } from 'react'; 
 import './CreateTodoButton.css';
 
-const CreateTodoButton:FC = () => {
-  const { setToggleModal } = useContext(TodoContext)
+interface Props {
+  setToggleModal: Function;
+}
+
+const CreateTodoButton:FC<Props> = ({ setToggleModal }) => {
 
   return (
     <button

@@ -1,14 +1,14 @@
-import React, { FC, useContext } from 'react'; 
+import React, { FC } from 'react'; 
 import { Todo } from '../../models/Todo';
-import { TodoContext } from '../TodoContext';
 import './TodoItem.css';
 
 interface Props {
   todo: Todo;
+  onComplete: Function;
+  onDelete: Function;
 } 
 
 const TodoItem:FC<Props> = (props) => {
-  const { toggleCompleteTodo, deleteTodo} = useContext(TodoContext);
   const {text, completed} = props.todo;
   
   return (
@@ -16,7 +16,7 @@ const TodoItem:FC<Props> = (props) => {
 
       <span
         className='TodoItem--status icon'
-        onClick={() => toggleCompleteTodo(text)}
+        onClick={() => props.onComplete(text)}
       >
         <i className={`bi ${completed ? 'bi-patch-check' : 'bi-patch-minus'}`} />
       </span>
@@ -28,7 +28,7 @@ const TodoItem:FC<Props> = (props) => {
       <span
         title='Delete TODO'
         className='TodoItem--delete'
-        onClick={() => deleteTodo(text)}
+        onClick={() => props.onDelete(text)}
       >
         <i className='bi bi-x'/>
       </span>

@@ -1,22 +1,25 @@
-import React, { FC, useContext, useState } from 'react'; 
-import { TodoContext } from '../TodoContext';
+import React, { FC, useState } from 'react'; 
 import './CreateTodoForm.css';
 
-const CreateTodoForm:FC = () => {
+interface Props {
+  setToggleModal: Function
+  createTodo: Function
+}
+
+const CreateTodoForm:FC<Props> = (props) => {
   const [newTodoName, setNewTodoName] = useState('');
-  const { setToggleModal, createTodo } = useContext(TodoContext);
   
   const onChange = (event: any) => {
     setNewTodoName(event.target.value);
   }
 
   const onCancel = () => {
-    setTimeout(() => setToggleModal(false), 250)
+    setTimeout(() => props.setToggleModal(false), 250)
   }
 
   const onSubmit = (event: any) => {
     event.preventDefault();
-    createTodo(newTodoName);
+    props.createTodo(newTodoName);
     onCancel();
   }
 

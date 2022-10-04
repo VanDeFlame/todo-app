@@ -1,10 +1,19 @@
-import React, { FC, useContext } from 'react'; 
-import { TodoContext } from '../TodoContext';
+import React, { FC } from 'react'; 
 import './TodoSearch.css';
+import TodoSearchUI from './TodoSearchUI';
 
-const TodoSearch:FC = () => {
-  const { searchValue, setSearchValue, filterValue, setFilterValue } = useContext(TodoContext)
+interface Props {
+  searchValue: string;
+  setSearchValue: Function;
+  filterValue: string;
+  setFilterValue: Function;
+}
 
+const TodoSearch:FC<Props> = ({
+  searchValue, setSearchValue,
+  filterValue, setFilterValue
+}) => {
+  
   const onSearchInputChange = (event: any) => {
     setSearchValue(event.target.value);
   }
@@ -20,26 +29,12 @@ const TodoSearch:FC = () => {
   }
 
   return (
-    <div className='TodoSearch'>
-      <input
-        title='Search TODOs'
-        name='searchbar'
-        className='TodoSearch--input input-text'
-        placeholder='Write here to filter list'
-        value={searchValue}
-        onChange={onSearchInputChange}
-      />
-
-      <button
-        title='Filter completed / incompleted TODOs'
-        name='filter'
-        className='TodoSearch--filter button icon'
-        onClick={changeFilterState}
-      >
-        <i className={`bi bi-funnel-fill ${filterValue}`} />
-      </button>
-      
-    </div>
+    <TodoSearchUI 
+      searchValue={searchValue}
+      onSearch={onSearchInputChange}
+      filterValue={filterValue}
+      onFilter={changeFilterState}
+    />
   )
 }
 

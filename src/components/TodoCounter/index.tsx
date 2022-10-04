@@ -1,15 +1,18 @@
-import React, { FC, useContext } from 'react'; 
-import { TodoContext } from '../TodoContext';
+import React, { FC } from 'react'; 
 import './TodoCounter.css';
 
-const TodoCounter:FC = () => {
-  const {completedTodos, totalTodos} = useContext(TodoContext);
+interface Props {
+  total: number;
+  completed: number;
+}
+
+const TodoCounter:FC<Props> = ({total, completed}) => {
 
   return (
     <h2 className='TodoCounter'>
       Completed
-      <span className={`TodoCounter--counter ${(completedTodos === totalTodos) ? 'counter__completed' : ''}`}>
-        {completedTodos} of {totalTodos}
+      <span className={`TodoCounter--counter ${(completed === total) ? 'counter__completed' : ''}`}>
+        {completed} of {total}
       </span>TODOs
     </h2>
   )
