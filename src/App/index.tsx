@@ -13,8 +13,8 @@ import { Loader } from '../components/Loader';
 import { TodoListEmpty } from '../components/TodoListEmpty';
 import { TodoListNoResults } from '../components/TodoListNoResults';
 import { TodoHeader } from '../components/TodoHeader';
+import { ChangeAlert } from '../components/ChangeAlert';
 import './App.css';
-import { ChangeAlertWithStorageListener } from '../components/ChangeAlert';
 
 function App() {
   const { loading,
@@ -81,7 +81,7 @@ function App() {
         </Modal>
       }
 
-      <ChangeAlertWithStorageListener
+      <ChangeAlert
         setToggleModal={setToggleModal}
         sincronize={sincronizeTodos} 
       />

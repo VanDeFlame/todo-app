@@ -1,35 +1,42 @@
 import React, { FC } from 'react'; 
 import { Modal } from '../Modal';
-import ChangeAlertUI from './ChangeAlertUI';
-import { withStorageListener } from './withStorageListener';
+import { useStorageListener } from '../../hooks/useStorageListener';
 import './ChangeAlert.css';
 
 interface Props {
-  show?: boolean;
-  toggleShow?: Function;
   setToggleModal: Function;
   sincronize: Function;
 }
 
-const ChangeAlert:FC<Props> = ({ show, toggleShow, setToggleModal, sincronize }) => {
+const ChangeAlert:FC<Props> = ({ setToggleModal, sincronize }) => {
+  const { show, toggleShow } = useStorageListener(sincronize);
+
   const onReload = () => {
     setTimeout(() => {
       setToggleModal(false);
-      toggleShow!(false);
-      sincronize(false)
+      toggleShow();
     }, 250)
   }
 
   if (show) return (
     <Modal>
-      <ChangeAlertUI onReload={onReload} />
+      <div className='ChangeAlert'>
+        <h2>Changes detected</h2>
+        <p>Do you want sincronize?</p>
+        
+        <div className='CreateTodoForm--actions'>
+          <button 
+            className='CreateTodoForm--actions--button button'
+            type='button'
+            onClick={onReload}
+          >Reload</button>
+        </div>
+      </div>
     </Modal>
   )
   else return null;
 }
 
-const ChangeAlertWithStorageListener = withStorageListener<Props>(ChangeAlert)
-
-export { ChangeAlertWithStorageListener };
+export { ChangeAlert };
 
 
