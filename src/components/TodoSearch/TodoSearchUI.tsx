@@ -5,11 +5,12 @@ interface Props {
   onSearch: Function;
   filterValue: string;
   onFilter: Function;
+  loading: boolean
 } 
 
 const TodoSearchUI:FC<Props> = ({
   searchValue, onSearch,
-  onFilter, filterValue
+  onFilter, filterValue, loading
 }) => {
   
   return (
@@ -20,6 +21,7 @@ const TodoSearchUI:FC<Props> = ({
         className='TodoSearch--input input-text'
         placeholder='Write here to filter list'
         value={searchValue}
+        disabled={loading}
         onChange={e => onSearch(e)}
       />
 
@@ -28,6 +30,7 @@ const TodoSearchUI:FC<Props> = ({
         name='filter'
         className='TodoSearch--filter button icon'
         onClick={() => onFilter()}
+        disabled={loading}
       >
         <i className={`bi bi-funnel-fill ${filterValue}`} />
       </button>

@@ -14,6 +14,7 @@ import { TodoListEmpty } from '../components/TodoListEmpty';
 import { TodoListNoResults } from '../components/TodoListNoResults';
 import { TodoHeader } from '../components/TodoHeader';
 import './App.css';
+import { ChangeAlertWithStorageListener } from '../components/ChangeAlert';
 
 function App() {
   const { loading,
@@ -29,33 +30,29 @@ function App() {
     completedTodos,
     totalTodos,
     setToggleModal,
-    createTodo
+    createTodo,
+    sincronizeTodos
   } = useTodos();
 
   const handleTodoListStatus = () => {
     // Loading
-    if (loading) return <Loader />;
+    if (loading)                return <Loader />;
     // Error
-    if (error)   return <Error error={error} />;
-    
-    // Normal
-    if (searchedTodos.length) {
-      return searchedTodos.map((todo: Todo) => (
-        <TodoItem
-          todo={todo}
-          key={todo.text}
-          onComplete={toggleCompleteTodo}
-          onDelete={deleteTodo}
-        />
-      ))
-    }
-    
-    // No results
-    if (searchValue.length)     return <TodoListNoResults />;
-    if (filterValue !== 'none') return <TodoListNoResults />;
-
+    if (error)                  return <Error error={error} />;
     // No exists TODOs
-    return <TodoListEmpty />;
+    if (!totalTodos)            return <TodoListEmpty />;
+    // No search / filter results
+    if (!searchedTodos.length)  return <TodoListNoResults />;
+
+    // Normal render
+    return searchedTodos.map((todo: Todo) => (
+      <TodoItem
+        todo={todo}
+        key={todo.text}
+        onComplete={toggleCompleteTodo}
+        onDelete={deleteTodo}
+      />
+    ))
   }
 
   return (
@@ -67,6 +64,7 @@ function App() {
           setSearchValue={setSearchValue}
           filterValue={filterValue}
           setFilterValue={setFilterValue}
+          loading={loading}
         />
       </TodoHeader>
 
@@ -76,9 +74,17 @@ function App() {
       {
         toggleModal &&
         <Modal>
-          <CreateTodoForm setToggleModal={setToggleModal} createTodo={createTodo}/>
+          <CreateTodoForm
+            setToggleModal={setToggleModal}
+            createTodo={createTodo}
+          />
         </Modal>
       }
+
+      <ChangeAlertWithStorageListener
+        setToggleModal={setToggleModal}
+        sincronize={sincronizeTodos} 
+      />
     </React.Fragment>
   )
 }

@@ -7,11 +7,12 @@ interface Props {
   setSearchValue: Function;
   filterValue: string;
   setFilterValue: Function;
+  loading: boolean;
 }
 
 const TodoSearch:FC<Props> = ({
   searchValue, setSearchValue,
-  filterValue, setFilterValue
+  filterValue, setFilterValue, loading
 }) => {
   
   const onSearchInputChange = (event: any) => {
@@ -34,6 +35,7 @@ const TodoSearch:FC<Props> = ({
       onSearch={onSearchInputChange}
       filterValue={filterValue}
       onFilter={changeFilterState}
+      loading={loading}
     />
   )
 }

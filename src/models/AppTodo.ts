@@ -15,4 +15,5 @@ export interface AppTodo {
   createTodo: Function,
   toggleModal: boolean,
   setToggleModal: Function,
+  sincronizeTodos: Function,
 }

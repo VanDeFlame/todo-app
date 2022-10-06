@@ -1,0 +1,10 @@
+.ChangeAlert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.ChangeAlert > p {
+  margin: 8px 0 20px;
+}

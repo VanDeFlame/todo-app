@@ -42,3 +42,7 @@
   background-color: var(--color-dark-gray); 
   color: white;
 }
+
+.button:disabled, .input-text:disabled {
+  opacity: 50%;
+}

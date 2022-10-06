@@ -1,6 +1,6 @@
 .TodoItem {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
   min-height: 64px;

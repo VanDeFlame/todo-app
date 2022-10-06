@@ -11,7 +11,13 @@ const defaultTodos: Todo[] = [
 ]
 
 const useTodos = (): AppTodo => {
-  const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage<Todo[]>('Todos', defaultTodos)
+  const {
+    item: todos, 
+    saveItem: saveTodos, 
+    sincronizeItem: sincronizeTodos,
+    loading, 
+    error
+  } = useLocalStorage<Todo[]>('Todos', defaultTodos)
   
   // Filter and Search
   const [searchValue, setSearchValue] = useState('');
@@ -65,7 +71,8 @@ const useTodos = (): AppTodo => {
     deleteTodo,
     createTodo,
     toggleModal,
-    setToggleModal
+    setToggleModal,
+    sincronizeTodos,
   };
 }
 
