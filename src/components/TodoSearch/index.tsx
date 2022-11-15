@@ -3,38 +3,39 @@ import './TodoSearch.css';
 import TodoSearchUI from './TodoSearchUI';
 
 interface Props {
-  searchValue: string;
-  setSearchValue: Function;
   filterValue: string;
-  setFilterValue: Function;
+  onFilter: Function;
+  searchValue: string;
+  onSearch: Function;
   loading: boolean;
 }
 
 const TodoSearch:FC<Props> = ({
-  searchValue, setSearchValue,
-  filterValue, setFilterValue, loading
+  searchValue, onSearch,
+  filterValue, onFilter,
+  loading
 }) => {
   
   const onSearchInputChange = (event: any) => {
-    setSearchValue(event.target.value);
+    onSearch(event.target.value);
   }
 
   const changeFilterState = () => {
     // none => completed => incompleted => none
     switch(filterValue) {
-      case 'none': setFilterValue('true'); break;
-      case 'true': setFilterValue('false'); break;
-      case 'false': setFilterValue('none'); break;
-      default: setFilterValue('none'); break;
+      case 'none': onFilter('true'); break;
+      case 'true': onFilter('false'); break;
+      case 'false': onFilter('none'); break;
+      default: onFilter('none'); break;
     }
   }
 
   return (
     <TodoSearchUI 
-      searchValue={searchValue}
-      onSearch={onSearchInputChange}
       filterValue={filterValue}
       onFilter={changeFilterState}
+      searchValue={searchValue}
+      onSearch={onSearchInputChange}
       loading={loading}
     />
   )

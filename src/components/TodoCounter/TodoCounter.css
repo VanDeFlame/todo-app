@@ -2,7 +2,7 @@
   min-height: 35px;
   margin: 20px 8px 12px;
   color: #ddd;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .TodoCounter--counter {

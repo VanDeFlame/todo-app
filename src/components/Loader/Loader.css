@@ -10,6 +10,7 @@
 
 .Loader > h2 {
   margin-bottom: 8px;
+  font-size: 2rem;
 }
 
 .Loader--box {

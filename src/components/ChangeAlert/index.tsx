@@ -4,16 +4,14 @@ import { useStorageListener } from '../../hooks/useStorageListener';
 import './ChangeAlert.css';
 
 interface Props {
-  setToggleModal: Function;
   sincronize: Function;
 }
 
-const ChangeAlert:FC<Props> = ({ setToggleModal, sincronize }) => {
+const ChangeAlert:FC<Props> = ({ sincronize }) => {
   const { show, toggleShow } = useStorageListener(sincronize);
 
   const onReload = () => {
     setTimeout(() => {
-      setToggleModal(false);
       toggleShow();
     }, 250)
   }
@@ -23,14 +21,12 @@ const ChangeAlert:FC<Props> = ({ setToggleModal, sincronize }) => {
       <div className='ChangeAlert'>
         <h2>Changes detected</h2>
         <p>Do you want sincronize?</p>
-        
-        <div className='CreateTodoForm--actions'>
-          <button 
-            className='CreateTodoForm--actions--button button'
-            type='button'
-            onClick={onReload}
-          >Reload</button>
-        </div>
+
+        <button 
+          className='ChangeAlert--button button'
+          type='button'
+          onClick={onReload}
+        >Reload</button>
       </div>
     </Modal>
   )

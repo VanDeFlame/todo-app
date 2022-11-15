@@ -8,3 +8,7 @@
 .ChangeAlert > p {
   margin: 8px 0 20px;
 }
+
+.ChangeAlert--button {
+  padding: 8px;
+}

@@ -1,22 +1,17 @@
-import React, { FC, ReactNode, ReactPortal } from "react";
-import { createPortal } from "react-dom";
+import React, { ReactNode } from "react";
 import './Modal.css';
 
 interface Props {
   children: ReactNode;
 }
 
-const Modal:FC<Props> = (props): ReactPortal => {
-  const modal = document.getElementById('modal');
-  
-  return createPortal(
+function Modal({ children }: Props) {
+  return (
     <div className="Modal">
       <div className='Modal--container'>
-        { props.children }
+        { children }
       </div>
-    </div>,
-
-    modal!
+    </div>
   )
 }
 

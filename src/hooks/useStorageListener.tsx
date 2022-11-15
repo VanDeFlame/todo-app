@@ -4,7 +4,7 @@ const useStorageListener = (sincronize: Function) => {
   const [storageChange, setStorageChange] = useState(false);
 
   window.addEventListener('storage', (change) => {
-    if (change.key === 'Todos')
+    if (change.key === 'TODOS_V2')
       setStorageChange(true);
   })
 

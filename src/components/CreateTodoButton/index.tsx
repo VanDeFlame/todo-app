@@ -1,16 +1,18 @@
-import React, { FC } from 'react'; 
+import React from 'react'; 
+import { useNavigate } from 'react-router-dom';
 import './CreateTodoButton.css';
 
-interface Props {
-  setToggleModal: Function;
-}
+const CreateTodoButton = () => {
+  const navigate = useNavigate();
 
-const CreateTodoButton:FC<Props> = ({ setToggleModal }) => {
+  const onCreateTodo = () => {
+    navigate('new', { replace: true });
+  }
 
   return (
     <button
       title='Create new TODO'
-      onClick={() => setToggleModal(true)}
+      onClick={onCreateTodo}
       className='CreateTodoButton button'
     >
       <i className='bi bi-plus-lg' />

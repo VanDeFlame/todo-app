@@ -52,17 +52,26 @@
   color: var(--color-bad)
 }
 
-.TodoItem--delete {
+.TodoItem--action {
   position: absolute;
-  top: 0;
-  right: 0;
   cursor: pointer;
 }
 
-.TodoItem--delete:hover {
+.TodoItem--action:hover {
   color: var(--color-meh)
 }
 
-.TodoItem--delete > .bi {
+.TodoItem--action > .bi {
   display: flex;
+}
+
+.TodoItem--action.action__delete {
+  top: 0;
+  right: 0;
+}
+
+.TodoItem--action.action__edit {
+  bottom: 2px;
+  right: 2px;
+  font-size: 12px;
 }

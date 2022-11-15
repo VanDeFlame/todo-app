@@ -8,8 +8,8 @@ interface Props {
 const Error:FC<Props> = ({error}) => {
   return (
     <div className='Error'>
-      <h2>Error {error}</h2>
-      <p>Has ocurred an error</p>
+      <h2>{error.error}</h2>
+      <p>{error.msg}</p>
     </div>
   )
 }
