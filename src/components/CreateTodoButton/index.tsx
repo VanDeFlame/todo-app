@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CreateTodoButton.css';
 
-const CreateTodoButton = () => {
+function CreateTodoButton() {
   const navigate = useNavigate();
 
   const onCreateTodo = () => {

@@ -1,20 +1,38 @@
-import React, { FC } from 'react'; 
+import React, { MouseEventHandler } from 'react'; 
 
 interface Props {
   searchValue: string;
+  setSearch: Function;
   onSearch: Function;
   filterValue: string;
-  onFilter: Function;
+  onFilter: MouseEventHandler;
+  onHome: MouseEventHandler;
   loading: boolean
 } 
 
-const TodoSearchUI:FC<Props> = ({
-  searchValue, onSearch,
-  onFilter, filterValue, loading
-}) => {
+function TodoSearchUI({
+  searchValue, setSearch, onSearch,
+  onFilter, filterValue, loading, onHome
+}: Props) {
   
+  const onEnterKey = (event: any) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onSearch();
+    }
+  }
+
   return (
     <div className='TodoSearch'>
+      <button
+        title='Search TODOs'
+        className='TodoSearch--home button icon'
+        onClick={onHome}
+        disabled={loading}
+      >
+        <i className='bi bi-house-fill' />
+      </button>
+
       <input
         title='Search TODOs'
         name='searchbar'
@@ -22,18 +40,41 @@ const TodoSearchUI:FC<Props> = ({
         placeholder='Write here to filter list'
         value={searchValue}
         disabled={loading}
-        onChange={e => onSearch(e)}
+        onChange={e => setSearch(e.target.value)}
+        onKeyDown={onEnterKey}
       />
 
-      <button
-        title='Filter completed / incompleted TODOs'
-        name='filter'
-        className='TodoSearch--filter button icon'
-        onClick={() => onFilter()}
-        disabled={loading}
-      >
-        <i className={`bi bi-funnel-fill ${filterValue}`} />
-      </button>
+      {(searchValue !== '') ? (
+        <>
+          <button
+            title='Clear input'
+            className='TodoSearch--clear icon'
+            disabled={loading}
+            onClick={() => setSearch('')}
+          >
+            <i className='bi bi-x' />
+          </button>
+        
+          <button
+            title='Search TODOs'
+            name='search'
+            className='TodoSearch--search button icon'
+            onClick={() => onSearch()}
+            disabled={loading}
+          >
+            <i className='bi bi-search' />
+          </button>
+        </>
+      ) : (
+        <button
+          title='Filter completed / incompleted TODOs'
+          className='TodoSearch--filter button icon'
+          onClick={onFilter}
+          disabled={loading}
+        >
+          <i className={`bi bi-funnel-fill ${filterValue}`} />
+        </button>
+      )}
       
     </div>
   )

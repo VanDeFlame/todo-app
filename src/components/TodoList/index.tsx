@@ -1,14 +1,27 @@
-import React, { FC, ReactNode } from 'react'; 
+import React, { ReactNode } from 'react'; 
 import './TodoList.css';
 
 interface Props {
+  errorStatus: boolean;
+  onError: Function;
+  loadingStatus: boolean;
+  onLoading: Function;
   children: ReactNode;
 } 
 
-const TodoList:FC<Props> = (props) => {
+function TodoList({
+  errorStatus, onError,
+  loadingStatus, onLoading,
+  children
+}: Props) {
+
   return (
     <ul className='TodoList'>
-      {props.children}
+    {
+      (errorStatus && onError()) ||
+      (loadingStatus && onLoading()) ||
+      children
+    }
     </ul>
   )
 }

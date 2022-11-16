@@ -1,4 +1,5 @@
-import React, { FC } from 'react'; 
+import React from 'react'; 
+import { useNavigate } from 'react-router-dom';
 import './TodoSearch.css';
 import TodoSearchUI from './TodoSearchUI';
 
@@ -10,14 +11,24 @@ interface Props {
   loading: boolean;
 }
 
-const TodoSearch:FC<Props> = ({
-  searchValue, onSearch,
+function TodoSearch({
+  searchValue,
   filterValue, onFilter,
   loading
-}) => {
+}: Props) {
   
-  const onSearchInputChange = (event: any) => {
-    onSearch(event.target.value);
+  const navigate = useNavigate();
+  const [search, setSearch] = React.useState(searchValue);
+
+  const onSearch = () => {
+    search
+    ? navigate(`search/${search}`)
+    : navigate('/')
+  }
+
+  const onHome = () => {
+    setSearch('');
+    navigate('/');
   }
 
   const changeFilterState = () => {
@@ -34,8 +45,10 @@ const TodoSearch:FC<Props> = ({
     <TodoSearchUI 
       filterValue={filterValue}
       onFilter={changeFilterState}
-      searchValue={searchValue}
-      onSearch={onSearchInputChange}
+      searchValue={search}
+      onSearch={onSearch}
+      setSearch={setSearch}
+      onHome={onHome}
       loading={loading}
     />
   )

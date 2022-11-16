@@ -10,31 +10,35 @@ const defaultTodos: Todo[] = [
   { id: 2, text: 'Organize a meetup', completed: false },
 ]
 
-const useTodos = (): AppTodo => {
+function useTodos(): AppTodo {
   const {
     state: {
       error,
       item: todos,
       loading,
     }, 
+    onLoading,
     onUnsincronize: sincronizeTodos,
     saveItem: saveTodos,
   } = useLocalStorage<Todo[]>('TODOS_V2', defaultTodos)
-  
+
   /* STATES */
   // Filter and Search
   const [filterValue, setFilterValue] = useState('none');
   const [searchValue, setSearchValue] = useState('');
 
+  /* DERIVED STATES */
   // List of TODOs apply Search and Filter 
-  let searchedTodos = todos
-    .filter(td => td.text.toLowerCase().includes(searchValue.toLowerCase()))
-    .filter(td => (filterValue==='none') ? td : `${td.completed}` === filterValue)
+  let filteredTodos: Todo[] = todos.filter(td => (filterValue === 'none') 
+    ? td : `${td.completed}` === filterValue)
   
+  let searchedTodos: Todo[] = filteredTodos
+    .filter(td => td.text.toLowerCase().includes(searchValue))
+
   // Total and Completed 
   const completedTodos = todos.filter(td => td.completed).length;
   const totalTodos = todos.length;
-  
+
   /* STATE UPDATERS */
   const toggleCompleteTodo = (id: number) => {
     const i = todos.findIndex(td => td.id === id);
@@ -61,7 +65,19 @@ const useTodos = (): AppTodo => {
     newTodos[i] = todo;
     saveTodos(newTodos);
   }
-
+  const onSearch = (newSearchValue: string) => {
+    const nSV = newSearchValue.toLowerCase();
+    if (searchValue === nSV) return;
+    onLoading();
+    setSearchValue(nSV);
+  }
+  const onFilter = (newFilterValue: string) => {
+    const nFV = newFilterValue.toLowerCase();
+    if (filterValue === nFV) return;
+    onLoading();
+    setFilterValue(nFV);
+  }
+  
   /* FUNCTIONS */
   const findTodo = (id: number) => {
     const todo = todos.find(td => td.id === id);
@@ -72,16 +88,18 @@ const useTodos = (): AppTodo => {
     state: {
       error,
       loading,
+  
       filterValue,
       searchValue,
       
       completedTodos,
       totalTodos,
-      searchedTodos,
+      filteredTodos,
+      searchedTodos
     },
     stateUpdaters: {
-      onFilter: setFilterValue,
-      onSearch: setSearchValue,
+      onFilter,
+      onSearch,
   
       createTodo,
       deleteTodo,

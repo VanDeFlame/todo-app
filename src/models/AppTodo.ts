@@ -9,6 +9,7 @@ interface AppTodo {
     
     completedTodos: number,
     totalTodos: number,
+    filteredTodos: Todo[],
     searchedTodos: Todo[],
   };
 

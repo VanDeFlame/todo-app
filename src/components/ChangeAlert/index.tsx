@@ -1,4 +1,4 @@
-import React, { FC } from 'react'; 
+import React from 'react'; 
 import { Modal } from '../Modal';
 import { useStorageListener } from '../../hooks/useStorageListener';
 import './ChangeAlert.css';
@@ -7,7 +7,7 @@ interface Props {
   sincronize: Function;
 }
 
-const ChangeAlert:FC<Props> = ({ sincronize }) => {
+function ChangeAlert({ sincronize }: Props) {
   const { show, toggleShow } = useStorageListener(sincronize);
 
   const onReload = () => {

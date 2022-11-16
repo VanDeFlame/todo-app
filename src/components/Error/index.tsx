@@ -1,11 +1,14 @@
-import React, { FC } from 'react'; 
+import React from 'react'; 
 import './Error.css';
 
 interface Props {
-  error: any
+  error: {
+    error: any,
+    msg: string
+  }
 } 
 
-const Error:FC<Props> = ({error}) => {
+function Error({error}: Props) {
   return (
     <div className='Error'>
       <h2>{error.error}</h2>

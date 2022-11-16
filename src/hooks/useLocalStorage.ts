@@ -9,6 +9,7 @@ const initialState = <T, S>(initialValue: T): S => ({
 
 enum actionTypes {
   ERROR        = 'ERROR',
+  LOAD         = 'LOAD',
   SAVE         = 'SAVE',
   SUCCESS      = 'SUCCESS',
   UNSINCRONIZE = 'UNSINCRONIZE',
@@ -29,6 +30,18 @@ const useLocalStorage = <T>(itemName: string, initialValue: T) => {
     type: actionTypes.ERROR,
     payload: { error }
   });
+  const onLoading = (time?: number) => {
+    dispatch({
+      type: actionTypes.LOAD,
+      payload: { loading: true }
+    });
+    setTimeout(() => {
+      dispatch({
+        type: actionTypes.LOAD,
+        payload: { loading: false }
+      });
+    }, (time || 500));
+  }
   const onSave = (item: T) => dispatch({
     type: actionTypes.SAVE,
     payload: { item }
@@ -58,7 +71,7 @@ const useLocalStorage = <T>(itemName: string, initialValue: T) => {
       } catch (err) {
         onError(err)
       }
-    }, 1000)
+    }, 1000);
   }, [state.sincronized])
 
   // update Item in localStorage
@@ -74,6 +87,7 @@ const useLocalStorage = <T>(itemName: string, initialValue: T) => {
 
   return {
     state,
+    onLoading,
     onUnsincronize,
     saveItem,
   };
@@ -84,6 +98,10 @@ const reducer = <S>(state: S, {type, payload}: {type: actionTypes, payload?: any
     case actionTypes.ERROR: return {
       ...state,
       error: payload.error,
+    }
+    case actionTypes.LOAD: return {
+      ...state,
+      loading: payload.loading,
     }
     case actionTypes.SAVE: return {
       ...state,
