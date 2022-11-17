@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './TodoForm.css';
 
 interface Props {
@@ -9,17 +9,17 @@ interface Props {
 }
 
 function TodoForm({actionType, submitAction, todoText}: Props) {
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const onCancel = () => {
-    navigate('/');
+    history.push('/');
   }
   
   const onSubmit = (event: any) => {
     event.preventDefault();
     const todoText = new FormData(event.target).get('text') as string;
     submitAction(todoText)    
-    navigate('/', { replace: true });
+    history.push('/');
   }
 
   return (

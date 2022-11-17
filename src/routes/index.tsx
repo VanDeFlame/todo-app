@@ -1,26 +1,21 @@
 import React from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { CreatePage } from './CreatePage';
 import { EditPage } from './EditPage';
 import { Home } from './Home';
-import { AllTodosPage } from './Home/AllTodosPage';
-import { SearchedTodosPage } from './Home/SearchedTodosPage';
 import { NotFound } from 'components/NotFound';
 
 
 function App() {
   return (
     <HashRouter>
-      <Routes>
-        <Route path='/' element={<Home />} >
-          <Route path='search/:search' element={<SearchedTodosPage />} />
-          <Route index element={<AllTodosPage />} />
-        </Route>
-        <Route path='new' element={<CreatePage />} />
-        <Route path='edit/:todoId' element={<EditPage />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <Switch>
+        <Route path='/' component={Home} />
+        <Route path='/new' component={CreatePage} />
+        <Route path='/edit/:todoId' component={EditPage} />
+        <Route path='*' component={NotFound} />
+      </Switch>
     </HashRouter>
   )
 }

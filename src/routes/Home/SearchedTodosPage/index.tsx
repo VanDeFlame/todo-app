@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { AppTodo } from 'models/AppTodo';
 import { Todo } from 'models/Todo';
 import { TodoItem } from 'components/TodoItem';
 import { TodoListNoResults } from 'components/TodoListNoResults';
 
-function SearchedTodosPage() {
-  const { search } = useParams();
+interface Props {
+  state: AppTodo['state'];
+  stateUpdaters: AppTodo['stateUpdaters'];
+}
 
-  const { state, stateUpdaters } = useOutletContext<AppTodo>();
+function SearchedTodosPage({ state, stateUpdaters }: Props) {
+  const { search } = useParams<any>();
+
   const { searchValue, searchedTodos } = state;
   const { deleteTodo, completeTodo, onSearch } = stateUpdaters;
   

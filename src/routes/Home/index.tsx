@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { useTodos } from 'hooks/useTodos';
 import { CreateTodoButton } from 'components/CreateTodoButton';
@@ -10,6 +10,8 @@ import { Error } from 'components/Error';
 import { Loader } from 'components/Loader';
 import { TodoHeader } from 'components/TodoHeader';
 import { ChangeAlert } from 'components/ChangeAlert';  
+import { AllTodosPage } from './AllTodosPage';
+import { SearchedTodosPage } from './SearchedTodosPage';
 
 function Home() {
   const { state, stateUpdaters } = useTodos();
@@ -26,7 +28,6 @@ function Home() {
 
   const {
     onFilter,
-    onSearch,
 
     sincronizeTodos,
   } = stateUpdaters;
@@ -39,7 +40,6 @@ function Home() {
           filterValue={filterValue}
           onFilter={onFilter}
           searchValue={searchValue}
-          onSearch={onSearch}
           loading={loading}
         />
       </TodoHeader>
@@ -50,7 +50,20 @@ function Home() {
         loadingStatus={loading}
         onLoading={() => (<Loader />)}
       >
-        <Outlet context={{state, stateUpdaters}} />
+        <Switch>
+          <Route exact path={'/'}>
+            <AllTodosPage 
+              state={state}
+              stateUpdaters={stateUpdaters}            
+            />
+          </Route>
+          <Route path={`/search/:search`}>
+            <SearchedTodosPage 
+              state={state}
+              stateUpdaters={stateUpdaters}            
+            />
+          </Route>
+        </Switch>
       </TodoList>
 
       <CreateTodoButton />

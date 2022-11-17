@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { useTodos } from 'hooks/useTodos';
 import { TodoForm } from 'components/TodoForm';
@@ -7,8 +7,7 @@ import { NotFound } from 'components/NotFound';
 import { Loader } from 'components/Loader';
 
 function EditPage() {  
-  const { todoId } = useParams();
-  const location = useLocation();
+  const { todoId } = useParams<any>();
 
   const { state, stateUpdaters, functions } = useTodos();
   const { loading } = state;
@@ -19,12 +18,11 @@ function EditPage() {
   const id = Number(todoId ?? '');
   if (isNaN(id)) return (<NotFound />);
   
-  // Location is empty and need loading?
-  const locationTodo = location.state?.todo;
-  if (!locationTodo && loading) return (<Loader />)
+  // need loading?
+  if (loading) return (<Loader />)
 
   // Exists a TODO?
-  const todo = locationTodo ?? findTodo(id);
+  const todo = findTodo(id);
   if (!todo) return (<NotFound />);
 
 

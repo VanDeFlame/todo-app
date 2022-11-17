@@ -1,13 +1,16 @@
 import React from 'react';
-import { useOutletContext } from 'react-router-dom';
 
 import { AppTodo } from 'models/AppTodo';
 import { Todo } from 'models/Todo';
 import { TodoItem } from 'components/TodoItem';
 import { TodoListEmpty } from 'components/TodoListEmpty';
 
-function AllTodosPage() {
-  const { state, stateUpdaters } = useOutletContext<AppTodo>();
+interface Props {
+  state: AppTodo['state'];
+  stateUpdaters: AppTodo['stateUpdaters'];
+}
+
+function AllTodosPage({ state, stateUpdaters }: Props) {
   const { totalTodos, filteredTodos } = state;
   const { deleteTodo, completeTodo } = stateUpdaters;
 

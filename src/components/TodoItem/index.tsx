@@ -1,5 +1,5 @@
 import React, { FC, MouseEventHandler } from 'react'; 
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Todo } from '../../models/Todo';
 import './TodoItem.css';
 
@@ -11,13 +11,10 @@ interface Props {
 
 const TodoItem:FC<Props> = ({todo, onComplete, onDelete}) => {
   const {text, completed} = todo;
-  const navigate = useNavigate()
+  const history = useHistory()
 
   const onEdit = () => {
-    navigate(`edit/${todo.id}`, { 
-      state: { todo },  
-      replace: true 
-    })
+    history.push(`/edit/${todo.id}`)
   }
 
   return (

@@ -1,12 +1,12 @@
 import React from 'react'; 
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './CreateTodoButton.css';
 
 function CreateTodoButton() {
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const onCreateTodo = () => {
-    navigate('new', { replace: true });
+    history.push('/new');
   }
 
   return (
